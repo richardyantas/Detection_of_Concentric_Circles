@@ -46,7 +46,8 @@ int main()
 			if( key == 27 )
 			{
 				break;
-			}				
+			}	
+		}			
 	}
 
 	//namedWindow("images",0);

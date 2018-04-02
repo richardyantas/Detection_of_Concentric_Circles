@@ -7,9 +7,13 @@
 namespace detect
 {
 
+
+
 	vector<Point2f> refinement(const Mat& frame_input)
 	{
 		vector<Point2f> centers;
+
+		
 		vector<Point2f> grid_point;
 		int width_grid = 50;
 		//a.push_back( Point2f(2.0,3.0) );
@@ -45,10 +49,9 @@ namespace detect
 
 		bool is_tracking;
 		vector<Point2f> old_points;
-¡
-
 		imshow("images", frame_input);
-
+		
+	
 		return centers;
 	}
 	
