@@ -10,7 +10,7 @@ enum    modes{DETECT_MODE,CALIBRATION_MODE,UNDISTORTION_MODE};
 
 namespace detect
 {
-        
+    	
     bool findRingsGridPattern(cv::Mat Input, cv::Size size, std::vector<cv::Point2f>& points,
                                 bool& isTracking, std::vector<cv::Point2f>& oldPoints){
         // ===================
@@ -22,11 +22,11 @@ namespace detect
         adaptiveThreshold(gray,gray,255,ADAPTIVE_THRESH_GAUSSIAN_C,THRESH_BINARY,41,6);
 
         //cv::imshow("g",gray);
+
         
         // ===================
         // ELLIPSIS DETECTION
         // ===================
-
         vector<vector<Point>> contours;
         vector<Vec4i> hierachy;
 
@@ -38,8 +38,7 @@ namespace detect
         for( int i = 0; i < contours.size(); i++ ){
             //minRect[i] = minAreaRect( Mat(contours[i]) );
             if( contours[i].size() > 4 ){
-                minEllipse[i] = fitEllipse( Mat(contours[i]) );
-            }
+                minEllipse[i] = fitEllipse( Mat(contours[i]) ); }
         }
 
         //Filtrar las ellipses
@@ -66,9 +65,7 @@ namespace detect
         }
 
         //Como minimo debemos capturar 40 elipses para continuar
-
-        //cv::imshow(windowGray,gray);
-
+        cv::imshow(windowGray,gray);
         if(selected.size() < 40) return false;
 
         //cv::imshow("g",gray);
@@ -86,9 +83,7 @@ namespace detect
         for(int i = 0; i < CPs.size();i++)
             circle(gray,CPs[i],1,Scalar(0,0,255),3,8);
 
-        //cv::imshow(windowGray,gray);
-        
-
+        cv::imshow(windowGray,gray);
         if(CPs.size() < 20) return false;
 
 
@@ -143,16 +138,17 @@ namespace detect
             circle(gray,CPs[i],5,Scalar(255,0,0),3,8);
         }
         
-        //cv::imshow(windowGray,gray);
+        cv::imshow(windowGray,gray);
         if(CPs.size() < 20) return false;
 
-        
+        /*
 
         // ===========================================
         // ORDERING AND SETTINGS POINTS ( Tracking )
         // ===========================================
         std::vector<Point2f> trackedPoints;
         int numTrackedItems = 20;
+
         
         if(isTracking){
             trackedPoints.resize(numTrackedItems);
@@ -216,11 +212,14 @@ namespace detect
             }
         }
 
-        //cv::imshow(windowGray,gray);
+        cv::imshow(windowGray,gray);
 
         // Copiamos el vector a points que seran nuestros CPs
         points = trackedPoints;
-            
+
+        
+        */
+
         return isTracking;
     }
 
@@ -444,7 +443,7 @@ namespace detect
     }
 
     float StandarDesviation(const std::vector<float> & values ){
-        int n = values.size();
+    	int n = values.size();
         float dmean = 0.0;
         float dstddev = 0.0;
 

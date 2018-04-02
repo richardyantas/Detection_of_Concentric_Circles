@@ -1,11 +1,13 @@
 #pragma once
 
 #include "../headers.h"
+#include "utils.h"
+#include "detection.h"
 
 namespace detect
 {
-	
-	vector<Point2f> detection_circles(const Mat& frame_input)
+
+	vector<Point2f> refinement(const Mat& frame_input)
 	{
 		vector<Point2f> centers;
 		vector<Point2f> grid_point;
@@ -13,7 +15,6 @@ namespace detect
 		//a.push_back( Point2f(2.0,3.0) );
 
 		//cout<<" width: "<<frame_input.cols<<endl;
-
 
 		for (int i = 0; i < frame_input.cols; i = i+width_grid)
 		{
@@ -31,14 +32,21 @@ namespace detect
 		{
 			cv::circle( frame_input, grid_point[i], 5, black );
 		}
+
+		cv::line(frame_input,Point2f(0.0, 0.0), Point2f(200.0,200.0), Scalar(156,240,234), 1, 8, 0);
+
     	//cv::circle( frame_input, grid_point, 5, black );
     	
-		Point2f seed_point = grid_point(random(grid_point.size));
-
+		//Point2f seed_point = grid_point(random(grid_point.size));
 		
-
-
     	cout<<"show images..."<<endl;
+		//imshow("images", frame_input);
+		vector<Point2f> center_temp;
+
+		bool is_tracking;
+		vector<Point2f> old_points;
+¡
+
 		imshow("images", frame_input);
 
 		return centers;
